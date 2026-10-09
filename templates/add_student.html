@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Student</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: #4a5568;
+            color: #fff;
+            padding: 24px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 20px; font-weight: 600; }
+        .back {
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back:hover { color: #fff; }
+        .content { padding: 32px; }
+        .form-group { margin-bottom: 18px; }
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #4a5568;
+            margin-bottom: 6px;
+        }
+        input {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.2s;
+            font-family: inherit;
+        }
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 13px;
+            background: #48bb78;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 8px;
+        }
+        .btn-submit:hover { background: #38a169; }
+        .alert {
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .alert-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border-left: 4px solid #38a169;
+        }
+        .alert-error {
+            background: #fed7d7;
+            color: #742a2a;
+            border-left: 4px solid #e53e3e;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Add New Student</h1>
+            <a href="{{ url_for('index') }}" class="back">← Back</a>
+        </div>
+
+        <div class="content">
+            {% if message %}
+            <div class="alert alert-{{ message_type }}">
+                {% if message_type == 'success' %}✅{% else %}⚠️{% endif %}
+                {{ message }}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('add_student') }}">
+                <div class="form-group">
+                    <label for="student_id">Student ID *</label>
+                    <input type="text" id="student_id" name="student_id" placeholder="e.g. S001" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" placeholder="e.g. Kamal Perera" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" placeholder="e.g. kamal@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age *</label>
+                    <input type="number" id="age" name="age" placeholder="e.g. 20" min="16" max="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="course">Course *</label>
+                    <input type="text" id="course" name="course" placeholder="e.g. Software Engineering" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Add Student</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
