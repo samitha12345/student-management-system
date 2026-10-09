@@ -72,6 +72,49 @@ def main():
 
     print("\nDone.")
 
+        # ---- Search Tests ----
+    print("\n" + "=" * 55)
+    print("  Search Functionality Tests")
+    print("=" * 55)
+
+    # Add one more student for search testing
+    service.add_student(
+        student_id="S002",
+        name="Nimal Silva",
+        email="nimal@example.com",
+        age=22,
+        course="Data Science",
+    )
+
+    # Search Test 1: Valid keyword
+    print("\n[SEARCH 1] Searching for 'kamal'...")
+    success, results, msg = service.search_by_name("kamal")
+    print(f"  Result : {msg}")
+    for s in results:
+        print(f"  -> {s}")
+
+    # Search Test 2: Partial match (case-insensitive)
+    print("\n[SEARCH 2] Searching for 'PERERA' (uppercase)...")
+    success, results, msg = service.search_by_name("PERERA")
+    print(f"  Result : {msg}")
+    for s in results:
+        print(f"  -> {s}")
+
+    # Search Test 3: No match
+    print("\n[SEARCH 3] Searching for 'xyz123' (no match)...")
+    success, results, msg = service.search_by_name("xyz123")
+    print(f"  Result : {msg}")
+
+    # Search Test 4: Empty keyword
+    print("\n[SEARCH 4] Searching for empty string...")
+    success, results, msg = service.search_by_name("")
+    print(f"  Result : {msg}")
+
+    # Search Test 5: Whitespace only
+    print("\n[SEARCH 5] Searching with only spaces...")
+    success, results, msg = service.search_by_name("   ")
+    print(f"  Result : {msg}")
+
 
 if __name__ == "__main__":
     main()

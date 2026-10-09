@@ -92,3 +92,25 @@ class StudentService:
     def get_all_students(self):
         """Return all students."""
         return self.students
+
+    def search_by_name(self, keyword):
+        """
+        Search students by name (case-insensitive partial match).
+        Returns (success: bool, results: list, message: str)
+        """
+        # Empty input check
+        if not keyword or not keyword.strip():
+            return False, [], "Search keyword is required."
+
+        keyword_lower = keyword.strip().lower()
+
+        # Partial match, case-insensitive
+        results = [
+            s for s in self.students
+            if keyword_lower in s.name.lower()
+        ]
+
+        if not results:
+            return False, [], f"No students found matching '{keyword.strip()}'."
+
+        return True, results, f"Found {len(results)} student(s) matching '{keyword.strip()}'."
